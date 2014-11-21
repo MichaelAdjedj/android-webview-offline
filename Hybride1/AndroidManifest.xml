@@ -3,13 +3,19 @@
     package="com.hybride1"
     android:versionCode="1"
     android:versionName="1.0" >
-
-    <uses-permission android:name="android.permission.INTERNET" />
     
-    <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="21" />
+	<uses-sdk
+    	android:minSdkVersion="15"
+    	android:targetSdkVersion="21" />
 
+	<uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,6 +30,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!-- Provider to expose the cached pages -->
+        <provider
+            android:name="com.hybride1.sync.SyncHTTPService$CacheHTTPContentProvider"
+            android:authorities="com.hybride1.webkitcache"
+            android:exported="false"
+            android:process=":htmlcache"
+            android:syncable="true" />
+
+        <!-- Service to synchronized the cached pages -->
+        <service
+            android:name="com.hybride1.sync.SyncHTTPService"
+            android:exported="false"
+            android:enabled="true"
+            android:process=":htmlcache" >
+            
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+            
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
     </application>
 
 </manifest>
