@@ -119,9 +119,9 @@ public class StartActivity extends Activity {
         // I am optimistic !
         // myWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
         myWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        myWebView.loadUrl(URL_HOME);
+        myWebView.loadUrl("http://www.compilsoft.com/fr/compilsoft.html");
         //        myWebView.loadUrl("http://www.compilsoft.com/fr/compilsoft.html");
-        //        myWebView.loadUrl("http://m.materiel.net");
+        //        myWebView.loadUrl("http://www.montpellier.fr/actualite/4092-actualites.htm");
 
 
     }
