@@ -16,7 +16,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 /**
- * @author madjedt
+ * @author madjedj
  *
  */
 public abstract class AbstractSyncService extends Service {
